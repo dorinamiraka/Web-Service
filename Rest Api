@@ -1,0 +1,56 @@
+@RestResource(urlMapping='/RestWebinar/Account/*')
+global with sharing class RestClass{
+   
+   
+    @HttpGet
+    global static list <Account> getAccounts() { 
+   
+    String id = RestContext.request.params.get('id');
+    Account[] acc = null;
+    if(id!=null){
+    acc =[Select id, name, phone From Account Where id =: id ];
+    }else{
+    acc =[Select id, name, phone From Account ];
+    }
+    return acc;
+        }
+        
+    @HttpPost
+    global static string CreateAccount(String companyName,string phone){
+    
+    Account a = new Account();
+    a.name = companyName;
+    a.phone = phone;
+    insert a;
+    restcontext.response.statusCode=201;
+    return a.id;
+    
+    }   
+    
+    global class accContact{
+    Account a {get;set;}
+    Contact c{get;set;}
+     }
+    
+    global class idSet{
+    string accountId {get;set;}
+    string contactId{get;set;}
+     }
+    
+    
+    @HttpPut
+    global static idSet accCon(accContact ac){
+    upsert ac.a;
+    upsert ac.c;
+    idSet id = new idSet();
+    id.accountId=ac.a.id;
+    ac.c.accountId=Id.accountId;
+    id.ContactId =ac.c.id;
+    return id;
+    
+    
+    
+    
+    }
+    
+     
