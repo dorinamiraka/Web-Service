@@ -1,0 +1,9 @@
+
+global class createFirstWebService
+{
+    webService static String FirstMetodo(String Name) 
+    {
+        return 'Hello '+Name;
+    }
+
+}
