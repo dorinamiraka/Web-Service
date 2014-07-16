@@ -1,0 +1,8 @@
+<apex:page controller="testWS">
+ <apex:form >
+ <apex:pageBlock title="Web Service Callout">
+ <apex:commandButton value="Submit" action="{!callWS}"/>
+ <apex:outputText escape="true" >{!returnNomeHello}</apex:outputText>
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>
