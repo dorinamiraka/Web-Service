@@ -1,0 +1,18 @@
+public class testWS{
+   
+    public string returnNomeHello{get; set;}
+    public string returnNome{get; set;}
+     
+       public PageReference callWS() {
+        returnNomeHello= returnNome();
+        return null;
+        }
+   
+    public string returnNome(){
+    soapSforceComSchemasClassCreatefirs.createFirstWebService s = new soapSforceComSchemasClassCreatefirs.createFirstWebService();
+    s.SessionHeader = new soapSforceComSchemasClassCreatefirs.SessionHeader_element();
+    s.SessionHeader.sessionId=Userinfo.getSessionId();
+    return s.FirstMetodo('Anna');
+    
+    }
+}
